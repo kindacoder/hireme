@@ -1,0 +1,42 @@
+<% include partials/header %>
+
+    <body>
+        <% include partials/nav %>
+            <div class="container">
+                <form class="form-signin" action="/users/register" method="POST">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="text-center mb-4">
+                        <img class="mb-4" src="/img/logo.png" alt="" width="150" height="72">
+                        <h4>Simply Signup to create an account with HireMe</h4>
+                    </div>
+                    <hr>
+                    <div class="form-label-group mb-4">
+                        <label for="name">Name</label>
+                        <input type="text" value="" class="form-control" name="name" placeholder="Full name" required autofocus>
+                    </div>
+                    <div class="form-label-group mb-4">
+                        <label for="email">Email address</label>
+                        <input type="email" id="inputEmail" value="" class="form-control" name="email" placeholder="Email address" required autofocus>
+                    </div>
+                    <div class="form-label-group mb-4">
+                        <label for="password">Password</label>
+                        <input type="password" value="" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-label-group mb-4">
+                        <label for="password2">Confirm password</label>
+                        <input type="password" value="" class="form-control" name="password2" placeholder="Confirm password" required autofocus>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" name="hr" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Register me as HR</label>
+                    </div>
+                    <br>
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                    <p class="mt-5 mb-3 text-muted text-center">&copy; 2018-2019</p>
+                </form>
+            </div>
+            <% include partials/footer %>
