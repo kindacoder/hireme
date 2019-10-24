@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Post new Job</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" width="120" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                      <span class="sr-only">(current)</span>
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login/signup (Jobseeker)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login/signup (Employer)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Active Jobs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Page Content -->
+    <div class="container ">
+        <div class="col-lg-12">
+            <br>
+            <br>
+
+            <h2 style="text-align: center"> Post new Job</h2>
+            <hr>
+
+            <div style="padding-left: 150px" class="row center">
+                <form method="POST" action="/hello">
+                    <div class="col-sm-12">
+                        <div class="row center">
+                            <div class="col-sm-6 form-group">
+                                <label>Company Name</label>
+                                <input type="text" name="name" placeholder="Enter the company name.." class="form-control">
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>City</label>
+                                <input name="city" type="text" placeholder="Enter city.." class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea name="address" placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>Role</label>
+                                <input name="roll" type="text" placeholder="Enter Designation Here.." class="form-control">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>Min salary</label>
+                                <input name="minsalary" type="text" placeholder="Enter Min salary.." class="form-control">
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>Max salary</label>
+                                <input name="maxsalary" type="text" placeholder="Enter Max salary.." class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">Skills</label>
+                            <select multiple name="skills" class="form-control" id="exampleFormControlSelect2">
+                                  <option value="ds">ds</option>
+                                  <option value="algo">algo</option>
+                                  <option value="html">Html</option>
+                                  <option value="css">css</option>
+                                  <option value="javascript">javascript</option>
+                                  <option value="node.js">node.js</option>
+                                  <option value="php">php</option>
+                                  <option value="mongodb">mongodb</option>
+                                  <option value="mysql">mysql</option>
+                                  <option value="git">git</option>
+                                </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label>Min year Experience</label>
+                                <input name="minex" type="text" placeholder="Enter min Experience required.." class="form-control">
+                            </div>
+
+                            <div class="col-sm-6 form-group">
+                                <label for="example-date-input" class="col-2 col-form-label">Expiry</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="date" value="2019-10-24" id="example-date-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Company details</label>
+                                <textarea name="companydetails" placeholder="Enter Company details here.." rows="7" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-lg btn-info">Submit</button>
+                        <br>
+                        <br>
+                        <br>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- /.container -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

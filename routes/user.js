@@ -10,6 +10,10 @@ router.get("/register", function(req, res) {
     res.render("signup");
 });
 
+router.get('/', function(req, res) {
+    res.render('user/dashboard');
+})
+
 
 
 

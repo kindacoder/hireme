@@ -5,3 +5,12 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+#maindiv {
+    border: 20px, solid, red;
+    border-style: inset;
+    background-color: lightgray;
+    border-radius: 5px;
+    border-bottom-width: 7px;
+    border-bottom-color: grey
+}
