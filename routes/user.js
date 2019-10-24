@@ -1,5 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const mongoose = require('mongoose');
+require("../models/Job")
+const Job = mongoose.model('job');
 //login
 router.get("/login", function(req, res) {
     res.render("login");
@@ -11,7 +14,9 @@ router.get("/register", function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    res.render('user/dashboard');
+    Job.find({}, function(err, data) {
+        res.render('user/dashboard', { jobs: data });
+    })
 })
 
 

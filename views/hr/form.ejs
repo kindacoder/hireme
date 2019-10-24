@@ -53,7 +53,7 @@
             <hr>
 
             <div style="padding-left: 150px" class="row center">
-                <form method="POST" action="/hello">
+                <form method="POST" action="/hr/postjob">
                     <div class="col-sm-12">
                         <div class="row center">
                             <div class="col-sm-6 form-group">
@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-sm-4 form-group">
                                 <label>Role</label>
-                                <input name="roll" type="text" placeholder="Enter Designation Here.." class="form-control">
+                                <input name="role" type="text" placeholder="Enter Designation Here.." class="form-control">
                             </div>
                             <div class="col-sm-4 form-group">
                                 <label>Min salary</label>
@@ -108,7 +108,7 @@
                             <div class="col-sm-6 form-group">
                                 <label for="example-date-input" class="col-2 col-form-label">Expiry</label>
                                 <div class="col-10">
-                                    <input class="form-control" type="date" value="2019-10-24" id="example-date-input">
+                                    <input class="form-control" name="expirydate" type="date" value="2019-10-24" id="example-date-input">
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-lg btn-info">Submit</button>
+                        <button type="submit" class="btn btn-lg btn-info">Submit</button>
                         <br>
                         <br>
                         <br>
