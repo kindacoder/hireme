@@ -51,39 +51,52 @@ router.get("/signup", function(req, res) {
 
 //signup post
 router.post("/signup", function(req, res) {
-    if (req.body.password != req.body.password2) {
-        req.flash('error_msg', 'Sorry, your password didn\'t match');
-        res.redirect('/users/signup')
-    } else {
-        var isHr = false;
-        if (req.body.hr == 'on') {
-            isHr = true;
+
+
+    User.findOne({ email: req.body.email }, function(err, user) {
+        if (user) {
+            req.flash('error_msg', 'Uh oh, you are already registered')
+            res.redirect('/users/signup');
+        } else {
+            if (req.body.password != req.body.password2) {
+                req.flash('error_msg', 'Sorry, your password didn\'t match');
+                res.redirect('/users/signup')
+            } else {
+                var isHr = false;
+                if (req.body.hr == 'on') {
+                    isHr = true;
+                }
+                const newUser = new User({
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: req.body.password,
+                        isHr: isHr
+                    })
+                    //encrypting the password
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash(newUser.password, salt, function(err, hash) {
+                        // Storing hash in my password DB.
+                        if (err) throw err;
+                        newUser.password = hash;
+                        newUser.save()
+                            .then(user => {
+                                req.flash('success_msg', 'Succesfully signed up');
+                                res.redirect('/users/login')
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    });
+                });
+
+
+            }
+
         }
-        const newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                isHr: isHr
-            })
-            //encrypting the password
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(newUser.password, salt, function(err, hash) {
-                // Storing hash in my password DB.
-                if (err) throw err;
-                newUser.password = hash;
-                newUser.save()
-                    .then(user => {
-                        req.flash('success_msg', 'Succesfully signed up');
-                        res.redirect('/users/login')
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-            });
-        });
+    })
 
 
-    }
+
 
 });
 
@@ -95,7 +108,7 @@ router.get('/', middleware.isLoggedIn, function(req, res) {
 })
 
 //user profile
-router.get('/profile/:id', function(req, res) {
+router.get('/profile/:id', middleware.isLoggedIn, function(req, res) {
     User.findOne({ _id: req.params.id }, function(err, user) {
         if (err) {
             console.log(err);

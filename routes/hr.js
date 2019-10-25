@@ -42,7 +42,8 @@ router.post('/postjob', middleware.isLoggedIn, function(req, res) {
             console.log(err);
             res.send('something went wrong')
         } else {
-            res.send('data saved')
+            req.flash('success_msg', 'Job successfully posted');
+            res.redirect('/hr/viewjobs');
         }
     })
 })
