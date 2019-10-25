@@ -55,4 +55,34 @@ router.get('/viewjobs', middleware.isLoggedIn, function(req, res) {
     })
 })
 
+//view users who have applied for the job
+router.get('/applications/:id', middleware.isLoggedIn, function(req, res) {
+
+    // if (req.params.id.match('/^[0-9a-fA-F]{24}$/')) { //objectId reference Error
+    // Yes, it's a valid ObjectId, proceed with `findById` call.
+    Job.findById({ _id: req.params.id }, function(err, job) {
+            if (err) {
+                console.log(err);
+                req.flash('error_msg', 'Some error occured');
+                res.redirect('/hr/viewjobs');
+            } else {
+                var applicantsArray = [];
+                // job.appliedUser.forEach(function(applicant) {
+                //     User.find({ _id: applicant }, function(err, user) {
+                //         if (err) {
+                //             console.log(err);
+                //         } else {
+
+
+                //         }
+
+                //     })
+                // })
+                res.render('hr/applicants', { applicants: job.appliedUser });
+
+            }
+        })
+        // }
+})
+
 module.exports = router;

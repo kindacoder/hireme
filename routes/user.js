@@ -21,16 +21,18 @@ router.get("/login", function(req, res) {
 router.post("/login", function(req, res, next) {
 
     User.findOne({ email: req.body.email }, function(err, user) {
-        // console.log(user);
-        if (user.isHr == true) {
+        if (!user) {
+            req.flash('error_msg', 'No user found for this email');
+            res.redirect('/users/login');
+        } else if (err) {
+            req.flash('error_msg', 'No user found for this email');
+            res.redirect('/users/login');
+        } else if (user.isHr == true) {
             passport.authenticate('local', {
                 successRedirect: '/hr/postjob',
                 failureRedirect: '/users/login',
                 failureFlash: true
             })(req, res, next);
-        } else if (err) {
-            req.flash('error_msg', 'No user found for this email');
-            res.redirect('/users/login');
         } else {
             passport.authenticate('local', {
                 successRedirect: '/users',
@@ -92,11 +94,30 @@ router.get('/', middleware.isLoggedIn, function(req, res) {
     })
 })
 
+//user profile
+router.get('/profile/:id', function(req, res) {
+    User.findOne({ _id: req.params.id }, function(err, user) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(user);
+            res.render('user/profile', { user: user })
+        }
+    })
+})
+
+
 //applying to the jobs
 router.get('/apply/:id', function(req, res) {
     //search in the job list
     Job.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { appliedUser: req.user.id } }, function(err, job) {
-        console.log(job);
+        if (err) {
+            console.log(err);
+        } else {
+            req.flash('success_msg', "You have applied for that job. Checkout new Jobs");
+            res.redirect('/users');
+
+        }
     })
 
 })
