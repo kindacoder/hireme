@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
 const app = express();
 
 
@@ -15,6 +18,28 @@ require("./models/Job");
 //middleware 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//express-session middleware
+app.use(session({
+    secret: 'ashutosh',
+    resave: false,
+    saveUninitialized: true
+}))
+
+//passport middlewares
+app.use(passport.initialize());
+app.use(passport.session());
+//using connect-flash
+app.use(flash());
+
+//Global variables to show the messages
+app.use(function(req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+})
+
+
 //serving static files : Middlewares
 app.use(express.static(__dirname + "/public"));
 // set the view engine to ejs
@@ -26,6 +51,10 @@ app.set('view engine', 'ejs');
 //routes
 var userRoutes = require("./routes/user");
 var hrRoutes = require("./routes/hr");
+
+//passport config
+require('./config/passport')(passport)
+
 
 app.get('/', (req, res) => {
     res.render('index');
