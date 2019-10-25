@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Active Jobs</title>
+    <title>Jobs posted by Me</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/hr/postjob">
                 <img src="/img/logo.png" width="120" height="30" class="d-inline-block align-top" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +23,18 @@
                   </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+
+
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
+                        <a class="nav-link" href="/hr/postjob">Home
                           <span class="sr-only">(current)</span>
                         </a>
                     </li>
-
-
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Applied Jobs</a>
+                        <a class="nav-link" href="/hr/viewjobs">Jobs posted by me</a>
                     </li>
+
+
                     <% if(user){ %>
                         <li class="nav-item">
                             <a class="nav-link" href="/users/logout">Logout</a>
@@ -69,9 +71,9 @@
                     <!-- Page Content -->
                     <div class="container">
                         <!-- Page Heading -->
-                        <h1 class="my-4 text-center">Welcome User!
+                        <h1 class="my-4 text-center">Welcome HR!
                             <div>
-                                <p style="font-size:20px" class="text-center">Here are some Active Jobs, you can apply</p>
+                                <p style="font-size:20px" class="text-center">Here is the list of job you have posted</p>
                             </div>
                         </h1>
                         <!-- Project One -->
@@ -136,7 +138,7 @@
                                     <div>
                                         <h5>Role: <span><b><%= job.role %></b></span></h5>
                                     </div>
-                                    <a class="btn float-right btn-primary " href="/users/apply/<%=job.id%>">Apply for this Job</a>
+                                    <a class="btn float-right btn-primary " href="/users/apply/<%=job.id%>">View candidates list</a>
                                 </div>
                             </div>
                             <hr>

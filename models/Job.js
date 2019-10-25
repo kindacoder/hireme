@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//create schema
+require("../models/User") //for reference
+    //create schema
 const jobSchema = new Schema({
     date: { type: Date, default: Date() },
     expirydate: { type: Date, required: true },
@@ -13,6 +14,8 @@ const jobSchema = new Schema({
     maxsalary: { type: Number, required: true },
     skills: { type: Array, required: true },
     minex: { type: Number, required: true },
+    appliedUser: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+    user: { type: String, required: true }
     //minex=minimum experience required for the job,
     ///save the hr who is posting the jobs
     // user: { type: Schema.Types.ObjectId, ref: 'users' }

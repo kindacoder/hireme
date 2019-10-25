@@ -33,7 +33,8 @@ router.post('/postjob', middleware.isLoggedIn, function(req, res) {
         minex: req.body.minex,
         date: req.body.date,
         expirydate: req.body.expirydate,
-        companydetails: req.body.companydetails
+        companydetails: req.body.companydetails,
+        user: req.user.id
     })
 
     newJob.save(function(err, resp) {
@@ -45,4 +46,13 @@ router.post('/postjob', middleware.isLoggedIn, function(req, res) {
         }
     })
 })
+
+
+//view jobs 
+router.get('/viewjobs', middleware.isLoggedIn, function(req, res) {
+    Job.find({ user: req.user.id }, function(err, job) {
+        res.render('hr/viewjobs', { jobs: job });
+    })
+})
+
 module.exports = router;

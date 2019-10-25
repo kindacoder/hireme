@@ -85,12 +85,23 @@ router.post("/signup", function(req, res) {
 
 });
 
-
+//user dashboard
 router.get('/', middleware.isLoggedIn, function(req, res) {
     Job.find({}, function(err, data) {
         res.render('user/dashboard', { jobs: data });
     })
 })
+
+//applying to the jobs
+router.get('/apply/:id', function(req, res) {
+    //search in the job list
+    Job.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { appliedUser: req.user.id } }, function(err, job) {
+        console.log(job);
+    })
+
+})
+
+
 
 
 //logout
