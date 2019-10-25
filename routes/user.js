@@ -121,7 +121,7 @@ router.get('/profile/:id', middleware.isLoggedIn, function(req, res) {
 
 
 //applying to the jobs
-router.get('/apply/:id', function(req, res) {
+router.get('/apply/:id', middleware.isLoggedIn, function(req, res) {
     //search in the job list
     Job.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { appliedUser: req.user.id } }, function(err, job) {
         if (err) {
@@ -138,7 +138,7 @@ router.get('/apply/:id', function(req, res) {
 
 
 
-//logout
+//logout user
 router.get('/logout', (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');

@@ -1,13 +1,20 @@
+//requirign mongoose
 const mongoose = require('mongoose');
-const middleware = require('../middleware/index');
+const middleware = require('../middleware/index'); //middleware to check if the user is logged in or not ?
+
+//Loading the models
 require("../models/Job")
 require("../models/User")
-const User = mongoose.model('user');
 
+//models
+const User = mongoose.model('user');
 const Job = mongoose.model('job');
+
+//reqire express
 var express = require("express");
 var router = express.Router();
-//post a job
+
+//job form
 router.get("/postjob", middleware.isLoggedIn, function(req, res) {
     User.findOne({ email: req.user.email }, function(err, user) {
         if (user.isHr == true) {
@@ -19,6 +26,8 @@ router.get("/postjob", middleware.isLoggedIn, function(req, res) {
     })
 
 });
+
+//post route for posting a job
 
 router.post('/postjob', middleware.isLoggedIn, function(req, res) {
 
@@ -62,28 +71,14 @@ router.get('/applications/:id', middleware.isLoggedIn, function(req, res) {
     // if (req.params.id.match('/^[0-9a-fA-F]{24}$/')) { //objectId reference Error
     // Yes, it's a valid ObjectId, proceed with `findById` call.
     Job.findById({ _id: req.params.id }, function(err, job) {
-            if (err) {
-                console.log(err);
-                req.flash('error_msg', 'Some error occured');
-                res.redirect('/hr/viewjobs');
-            } else {
-                var applicantsArray = [];
-                // job.appliedUser.forEach(function(applicant) {
-                //     User.find({ _id: applicant }, function(err, user) {
-                //         if (err) {
-                //             console.log(err);
-                //         } else {
-
-
-                //         }
-
-                //     })
-                // })
-                res.render('hr/applicants', { applicants: job.appliedUser });
-
-            }
-        })
-        // }
+        if (err) {
+            console.log(err);
+            req.flash('error_msg', 'Some error occured');
+            res.redirect('/hr/viewjobs');
+        } else {
+            res.render('hr/applicants', { applicants: job.appliedUser });
+        }
+    })
 })
 
 module.exports = router;

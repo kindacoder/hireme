@@ -1,4 +1,6 @@
 var User = require("../models/User");
+
+//middleware to check if the candidate is loggedin or not ?
 module.exports = {
     isLoggedIn: function(req, res, next) {
         // console.log(req.user);
