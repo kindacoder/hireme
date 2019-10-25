@@ -11,6 +11,7 @@ module.exports = function(passport) {
         User.findOne({
             email: email
         }).then(user => {
+
             if (!user) {
                 return done(null, false, { message: 'No user found' })
                 console.log('No user found')

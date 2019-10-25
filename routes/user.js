@@ -3,6 +3,7 @@ var router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const middleware = require('../middleware/index');
 require("../models/Job")
 
 const Job = mongoose.model('job');
@@ -18,11 +19,27 @@ router.get("/login", function(req, res) {
 //login post
 
 router.post("/login", function(req, res, next) {
-    passport.authenticate('local', {
-        successRedirect: '/users',
-        failureRedirect: '/users/login',
-        failureFlash: true
-    })(req, res, next);
+
+    User.findOne({ email: req.body.email }, function(err, user) {
+        // console.log(user);
+        if (user.isHr == true) {
+            passport.authenticate('local', {
+                successRedirect: '/hr/postjob',
+                failureRedirect: '/users/login',
+                failureFlash: true
+            })(req, res, next);
+        } else if (err) {
+            req.flash('error_msg', 'No user found for this email');
+            res.redirect('/users/login');
+        } else {
+            passport.authenticate('local', {
+                successRedirect: '/users',
+                failureRedirect: '/users/login',
+                failureFlash: true
+            })(req, res, next);
+        }
+    })
+
 })
 
 //signup get
@@ -69,15 +86,19 @@ router.post("/signup", function(req, res) {
 });
 
 
-router.get('/', function(req, res) {
+router.get('/', middleware.isLoggedIn, function(req, res) {
     Job.find({}, function(err, data) {
         res.render('user/dashboard', { jobs: data });
     })
 })
 
 
-
-
+//logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login');
+})
 
 
 module.exports = router;

@@ -12,7 +12,8 @@ const jobSchema = new Schema({
     minsalary: { type: Number, required: true },
     maxsalary: { type: Number, required: true },
     skills: { type: Array, required: true },
-    minex: { type: Number, required: true }, //minex=minimum experience required for the job,
+    minex: { type: Number, required: true },
+    //minex=minimum experience required for the job,
     ///save the hr who is posting the jobs
     // user: { type: Schema.Types.ObjectId, ref: 'users' }
 

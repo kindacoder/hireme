@@ -1,16 +1,26 @@
 const mongoose = require('mongoose');
+const middleware = require('../middleware/index');
 require("../models/Job")
+require("../models/User")
+const User = mongoose.model('user');
 
 const Job = mongoose.model('job');
 var express = require("express");
 var router = express.Router();
 //post a job
-router.get("/postjob", function(req, res) {
-    res.render('hr/form');
+router.get("/postjob", middleware.isLoggedIn, function(req, res) {
+    User.findOne({ email: req.user.email }, function(err, user) {
+        if (user.isHr == true) {
+            res.render('hr/form');
+        } else {
+            req.flash('error_msg', 'Only Hrs are allowed to use that route');
+            res.redirect('/users')
+        }
+    })
 
 });
 
-router.post('/postjob', function(req, res) {
+router.post('/postjob', middleware.isLoggedIn, function(req, res) {
 
     var newJob = new Job({
         name: req.body.name,
