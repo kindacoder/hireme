@@ -1,6 +1,7 @@
 {
     "name": "nodelogin",
     "version": "1.0.0",
+    "start": "node app.js",
     "description": "Node login",
     "main": "app.js",
     "scripts": {
